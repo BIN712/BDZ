@@ -1,0 +1,112 @@
+{
+	"num": [
+		3,
+		5,
+		10
+	],
+	"ticket": [
+		1,
+		3,
+		5,
+		7,
+		10,
+		20,
+		25,
+		30
+	],
+	"activeObstacleSpeed": [
+		1.4,
+		1.2,
+		0.9,
+		0.7
+	],
+	"pusherSpeedMove": [
+		10,
+		8,
+		5,
+		3
+	],
+	"spinSpeedMove": [
+		1.4,
+		1.2,
+		0.9,
+		0.7
+	],
+	"partyTimeActive": 5,
+	"partyTimeDuration": 30,
+	"gravity": -50,
+	"smallBall": {
+		"onReady": {
+			"mass": 80,
+			"friction": 0,
+			"restitution": 0.4,
+			"linearDamping": 1,
+			"angularDamping": 1
+		},
+		"onBonus": {
+			"mass": 40,
+			"friction": 0,
+			"restitution": 0.4,
+			"linearDamping": 1,
+			"angularDamping": 1
+		}
+	},
+	"bigBall": {
+		"onReady": {
+			"mass": 40,
+			"friction": 0.1,
+			"restitution": 0.4,
+			"linearDamping": 0.1,
+			"angularDamping": 0.5
+		},
+		"onSpin": {
+			"mass": 10000,
+			"friction": 0.1,
+			"restitution": 0.1,
+			"linearDamping": 0.5,
+			"angularDamping": 1
+		}
+	},
+	"stakeBlue": [
+		20,
+		40,
+		60,
+		100,
+		160
+	],
+	"stakeYellow": [
+		30,
+		50,
+		80,
+		150,
+		200
+	],
+	"stakeRed": [
+		50,
+		100,
+		150,
+		300,
+		500
+	],
+	"stakeBlueParty": [
+		180,
+		280,
+		380,
+		480,
+		580
+	],
+	"stakeYellowParty": [
+		230,
+		330,
+		430,
+		530,
+		630
+	],
+	"stakeRedParty": [
+		500,
+		600,
+		700,
+		800,
+		900
+	]
+}
