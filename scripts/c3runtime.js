@@ -8102,15 +8102,18 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => and("[outline=black]Big Ball Saved : ", n0.ExpInstVar());
 		},
+		() => "ballSpawn",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (and("[outline=black]Ball Spawn: ", v0.GetValue()) + "/5");
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			return () => and("Speed Move : ", n0.ExpObject());
 		},
-		() => 0.3,
 		() => 355,
 		() => 80,
 		() => 1340,
-		() => "ballSpawn",
 		() => 3,
 		() => 354,
 		() => 420,
@@ -8212,6 +8215,7 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 50);
 		},
+		() => 0.3,
 		() => "biru",
 		p => {
 			const n0 = p._GetNode(0);
