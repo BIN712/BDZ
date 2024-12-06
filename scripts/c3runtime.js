@@ -8408,6 +8408,7 @@ self.C3_ExpressionFuncs = [
 			return () => (f0("ball2D_2", f1("ball3D", n2.ExpObject(), n3.ExpObject()), f4("ball3D", n5.ExpObject(), n6.ExpObject())) - 25);
 		},
 		() => 40,
+		() => 715,
 		() => "ball2D_1",
 		p => {
 			const n0 = p._GetNode(0);
