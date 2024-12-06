@@ -8130,7 +8130,6 @@ self.C3_ExpressionFuncs = [
 			return () => f0("UI");
 		},
 		() => "UI",
-		() => 0.0166,
 		() => 2,
 		() => "loadSmallBall",
 		() => "loadBigBall",

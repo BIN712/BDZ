@@ -114,7 +114,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.viewportbottom,
 		C3.Plugins.Mikal_3DObject.Acts.SetOpacity,
 		C3.Behaviors.mikal_cannon_3d_physics.Cnds.OnPhysicsReady,
-		C3.Behaviors.mikal_cannon_3d_physics.Acts.SetTimestep,
 		C3.Behaviors.mikal_cannon_3d_physics.Acts.SetFriction,
 		C3.Behaviors.mikal_cannon_3d_physics.Acts.SetRestitution,
 		C3.Behaviors.mikal_cannon_3d_physics.Acts.SetWorldGravity,
