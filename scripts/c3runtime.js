@@ -8106,6 +8106,7 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => and("Speed Move : ", n0.ExpObject());
 		},
+		() => 0.3,
 		() => 355,
 		() => 80,
 		() => 1340,
@@ -8212,7 +8213,6 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 50);
 		},
-		() => 0.3,
 		() => "biru",
 		p => {
 			const n0 = p._GetNode(0);
