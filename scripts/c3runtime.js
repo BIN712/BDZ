@@ -8522,21 +8522,17 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(999, 9999);
 		},
-		() => 0.6,
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 20);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() + 50);
-		},
 		() => 0.3,
-		() => "biru",
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(and("stakeBlueParty.", 0));
+			return () => (n0.ExpObject() - 5);
 		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 15);
+		},
+		() => 0.15,
+		() => "biru",
 		() => "biru party",
 		p => {
 			const n0 = p._GetNode(0);
@@ -8545,10 +8541,6 @@ self.C3_ExpressionFuncs = [
 			return () => (((((n0.ExpInstVar() + 1)) === (n1.ExpObject("stakeBlue")) ? 1 : 0)) ? (0) : ((n2.ExpInstVar() + 1)));
 		},
 		() => "kuning",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(and("stakeYellowParty.", 0));
-		},
 		() => "kuning party",
 		p => {
 			const n0 = p._GetNode(0);
@@ -8557,10 +8549,6 @@ self.C3_ExpressionFuncs = [
 			return () => (((((n0.ExpInstVar() + 1)) === (n1.ExpObject("stakeYellow")) ? 1 : 0)) ? (0) : ((n2.ExpInstVar() + 1)));
 		},
 		() => "merah",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(and("stakeRedParty.", 0));
-		},
 		() => "merah party",
 		p => {
 			const n0 = p._GetNode(0);
@@ -8696,15 +8684,25 @@ self.C3_ExpressionFuncs = [
 		() => 0.2,
 		p => {
 			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() + 15);
-		},
-		p => {
-			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() - 60);
 		},
 		() => 9,
 		() => "party time",
-		() => "partyTime",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(and("stakeBlueParty.", n1.ExpInstVar()));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(and("stakeYellowParty.", n1.ExpInstVar()));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(and("stakeRedParty.", n1.ExpInstVar()));
+		},
 		() => "projeksi ke 2D",
 		() => "ball2D_2",
 		() => -5000,
