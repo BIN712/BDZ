@@ -8037,6 +8037,10 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("ticket");
 		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("ballRemain");
+		},
 		() => "activeObstacle.",
 		p => {
 			const n0 = p._GetNode(0);
@@ -8161,12 +8165,6 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
 			const v2 = p._GetNode(2).GetVar();
-			return () => n0.ExpObject((and(v1.GetValue(), v2.GetValue()) + ".zElevation"));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
 			return () => n0.ExpObject((and(v1.GetValue(), v2.GetValue()) + ".indexBola"));
 		},
 		p => {
@@ -8174,6 +8172,19 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			const v2 = p._GetNode(2).GetVar();
 			return () => n0.ExpObject((and(v1.GetValue(), v2.GetValue()) + ".bonus"));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			return () => (f0(n1.ExpObject((and(v2.GetValue(), v3.GetValue()) + ".zElevation"))) + 50);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			return () => n0.ExpObject((and(v1.GetValue(), v2.GetValue()) + ".zElevation"));
 		},
 		() => "bigBall.",
 		() => "bigBall",
@@ -8253,6 +8264,7 @@ self.C3_ExpressionFuncs = [
 		() => "stakeBlue",
 		() => "stakeYellow",
 		() => "stakeRed",
+		() => "ballRemain",
 		() => "triggerXnum1",
 		() => ".currentStake",
 		() => ".ballSpawnLeft",
@@ -8428,7 +8440,6 @@ self.C3_ExpressionFuncs = [
 		() => 355,
 		() => 80,
 		() => 1340,
-		() => 3,
 		() => 354,
 		() => 420,
 		() => "hide setting",
@@ -8443,6 +8454,7 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => ("[outline=black]version " + f0());
 		},
+		() => 3,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0("UI");
