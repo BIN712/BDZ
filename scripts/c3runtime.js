@@ -8038,16 +8038,16 @@ self.C3_ExpressionFuncs = [
 			return () => and("[outline=black]Party Time : ", v0.GetValue());
 		},
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => and(("[outline=black]Ticket" + "\n"), v0.GetValue());
-		},
-		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("ticket");
 		},
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("ballRemain");
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and(("[outline=black]Ticket" + "\n"), v0.GetValue());
 		},
 		() => "activeObstacle.",
 		p => {
@@ -8264,13 +8264,17 @@ self.C3_ExpressionFuncs = [
 		() => "triggerXnum4.",
 		() => "triggerTicket1.",
 		() => "triggerTicket2.",
-		() => "PT_xNum",
-		() => "PT_ticket",
 		() => "ticket",
 		() => "stakeBlue",
 		() => "stakeYellow",
 		() => "stakeRed",
 		() => "ballRemain",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("partyTimeActive");
+		},
+		() => "PT_xNum",
+		() => "PT_ticket",
 		() => "triggerXnum1",
 		() => ".currentStake",
 		() => ".ballSpawnLeft",
@@ -8332,6 +8336,11 @@ self.C3_ExpressionFuncs = [
 			return () => (and(".", f0()) + ".bonus");
 		},
 		() => 0.1,
+		() => 20,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("partyTimeDuration");
+		},
 		() => "debug",
 		p => {
 			const n0 = p._GetNode(0);
@@ -8431,10 +8440,14 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => and("Speed Move : ", n0.ExpObject());
 		},
+		() => "spawn small ball old",
 		() => 355,
 		() => 80,
 		() => 1340,
 		() => 2,
+		() => "spawn small ball new",
+		() => "smallBallDelay",
+		() => 0.3,
 		() => 354,
 		() => 420,
 		() => "hide setting",
@@ -8570,7 +8583,6 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(999, 9999);
 		},
-		() => 0.3,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() - 5);
