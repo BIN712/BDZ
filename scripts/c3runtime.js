@@ -8434,6 +8434,7 @@ self.C3_ExpressionFuncs = [
 		() => 355,
 		() => 80,
 		() => 1340,
+		() => 2,
 		() => 354,
 		() => 420,
 		() => "hide setting",
@@ -8730,7 +8731,6 @@ self.C3_ExpressionFuncs = [
 		},
 		() => 9,
 		() => "party time",
-		() => 2,
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
