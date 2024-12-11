@@ -8005,6 +8005,14 @@ self.C3_ExpressionFuncs = [
 		() => 1,
 		() => "Save",
 		() => "MySave",
+		() => "ball3D",
+		() => 343,
+		() => -89,
+		() => "",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject();
+		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0();
@@ -8147,7 +8155,6 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "smallBall.",
 		() => "smallBall",
-		() => "ball3D",
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
@@ -8160,7 +8167,6 @@ self.C3_ExpressionFuncs = [
 			const v2 = p._GetNode(2).GetVar();
 			return () => n0.ExpObject((and(v1.GetValue(), v2.GetValue()) + ".posY"));
 		},
-		() => "",
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
@@ -8277,10 +8283,6 @@ self.C3_ExpressionFuncs = [
 		() => "triggerBigBall",
 		() => "activeObstacle",
 		() => ".posX",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject();
-		},
 		() => ".posY",
 		() => ".firstAngle.X",
 		() => ".firstAngle.Y",
@@ -8330,14 +8332,6 @@ self.C3_ExpressionFuncs = [
 			return () => (and(".", f0()) + ".bonus");
 		},
 		() => 0.1,
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject("partyTimeActive");
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject("partyTimeDuration");
-		},
 		() => "debug",
 		p => {
 			const n0 = p._GetNode(0);
@@ -8460,9 +8454,51 @@ self.C3_ExpressionFuncs = [
 			return () => f0("UI");
 		},
 		() => "UI",
-		() => 2,
 		() => "loadSmallBall",
 		() => "loadBigBall",
+		() => "table physics ready",
+		() => "0x0005",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("smallBall.onBonus.mass");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("smallBall.onBonus.friction");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("smallBall.onBonus.restitution");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("smallBall.onBonus.linearDamping");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("smallBall.onBonus.angularDamping");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("smallBall.onReady.mass");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("smallBall.onReady.friction");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("smallBall.onReady.restitution");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("smallBall.onReady.linearDamping");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("smallBall.onReady.angularDamping");
+		},
+		() => "0x0006",
 		() => "0x0001",
 		() => "0x0002",
 		() => "object bergerak",
@@ -8486,7 +8522,6 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject(and("spinSpeedMove.", v1.GetValue()));
 		},
 		() => "big ball",
-		() => "0x0006",
 		() => 55,
 		p => {
 			const n0 = p._GetNode(0);
@@ -8582,7 +8617,6 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject("hitPointWorld.2");
 		},
 		() => "small ball",
-		() => "0x0005",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
@@ -8607,10 +8641,6 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			return () => f0(n1.ExpObject("smallBall.onReady.angularDamping"));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject("smallBall.onReady.mass");
 		},
 		() => "cek1",
 		p => {
@@ -8700,6 +8730,7 @@ self.C3_ExpressionFuncs = [
 		},
 		() => 9,
 		() => "party time",
+		() => 2,
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);

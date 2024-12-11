@@ -1,7 +1,7 @@
 {
 	"name": "Balldozer",
 	"short_name": "Balldozer",
-	"description": "",
+	"description": "Balldozer",
 	"start_url": "index.html",
 	"display": "fullscreen",
 	"orientation": "portrait",
