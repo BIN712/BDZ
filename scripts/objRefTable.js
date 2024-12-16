@@ -172,7 +172,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.AJAX.Exps.LastData,
 		C3.Plugins.System.Acts.GoToLayout,
 		C3.Plugins.Browser.Cnds.OnUpdateFound,
-		C3.Plugins.Browser.Cnds.OnUpdateReady,
+		C3.Plugins.Browser.Cnds.OnOfflineReady,
 		C3.Plugins.Browser.Acts.Reload
 	];
 };
