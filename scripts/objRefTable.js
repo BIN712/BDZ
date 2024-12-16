@@ -23,7 +23,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.LocalStorage,
 		C3.Plugins.Mouse,
 		C3.Plugins.PlatformInfo,
-		C3.Plugins.skymen_limit_fps,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Plugins.Mikal_3DObject.Cnds.OnLoaded,
 		C3.Plugins.Mikal_3DObject.Acts.SetStaticGeometry,
@@ -70,6 +69,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Json.Exps.ToBeautifiedString,
 		C3.Plugins.System.Cnds.Every,
 		C3.Plugins.System.Cnds.TriggerOnce,
+		C3.Plugins.System.Acts.SetGroupActive,
 		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.System.Exps.tickcount,
 		C3.Plugins.System.Exps.fps,
@@ -104,7 +104,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Exps.X,
 		C3.Plugins.System.Exps.layoutwidth,
 		C3.Plugins.Sprite.Acts.SetZElevation,
-		C3.Plugins.skymen_limit_fps.Acts.SetMaxFPS,
 		C3.Plugins.System.Exps.projectversion,
 		C3.Plugins.Sprite.Acts.SetPos,
 		C3.Plugins.System.Exps.viewportleft,
@@ -169,7 +168,10 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.PlatformInfo.Acts.RequestWakeLock,
 		C3.Plugins.AJAX.Cnds.OnComplete,
 		C3.Plugins.AJAX.Exps.LastData,
-		C3.Plugins.System.Acts.GoToLayout
+		C3.Plugins.System.Acts.GoToLayout,
+		C3.Plugins.Browser.Cnds.OnUpdateFound,
+		C3.Plugins.Browser.Cnds.OnUpdateReady,
+		C3.Plugins.Browser.Acts.Reload
 	];
 };
 self.C3_JsPropNameTable = [
@@ -302,7 +304,6 @@ self.C3_JsPropNameTable = [
 	{UI_UpLamp: 0},
 	{UI_Pin: 0},
 	{TXT_BallRemain: 0},
-	{LimitFPS: 0},
 	{bulatanTengah: 0},
 	{UI_PartyTime: 0},
 	{UI_Jackpot: 0},
@@ -327,7 +328,8 @@ self.C3_JsPropNameTable = [
 	{count: 0},
 	{str_path: 0},
 	{DebugPhysic: 0},
-	{Loaded: 0}
+	{Loaded: 0},
+	{updateAvailable: 0}
 ];
 
 self.InstanceType = {
@@ -416,7 +418,6 @@ self.InstanceType = {
 	UI_UpLamp: class extends self.ISpriteInstance {},
 	UI_Pin: class extends self.ISpriteInstance {},
 	TXT_BallRemain: class extends self.ITextInstance {},
-	LimitFPS: class extends self.IInstance {},
 	bulatanTengah: class extends self.ISpriteInstance {},
 	UI_PartyTime: class extends self.ISpriteInstance {},
 	UI_Jackpot: class extends self.ISpriteInstance {},
