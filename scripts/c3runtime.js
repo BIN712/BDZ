@@ -7853,7 +7853,8 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			return () => f0(n1.ExpObject("gravity"));
-		}
+		},
+		() => 14
 ];
 
 
