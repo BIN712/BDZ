@@ -40,7 +40,7 @@
 	"gravity": -50,
 	"smallBall": {
 		"onReady": {
-			"mass": 80,
+			"mass": 100,
 			"friction": 0,
 			"restitution": 0.4,
 			"linearDamping": 1,
@@ -48,8 +48,8 @@
 		},
 		"onBonus": {
 			"mass": 40,
-			"friction": 0,
-			"restitution": 0.4,
+			"friction": 1,
+			"restitution": 0.8,
 			"linearDamping": 1,
 			"angularDamping": 1
 		}
