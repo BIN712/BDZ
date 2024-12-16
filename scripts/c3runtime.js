@@ -8341,6 +8341,55 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("partyTimeDuration");
 		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (f0() % 2);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => and("[outline=black]FPS : ", f0());
+		},
+		() => "small",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => and("[outline=black]Small Ball : ", n0.ExpObject());
+		},
+		() => "big",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => and("[outline=black]Big Ball : ", n0.ExpObject());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (and("[outline=black]Big Ball : ", n0.ExpObject()) + " (max)");
+		},
+		() => "total",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => and("[outline=black]Total Ball : ", (n0.ExpObject() + n1.ExpObject()));
+		},
+		() => "bigBallSaved",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => and("[outline=black]Big Ball Saved : ", n0.ExpInstVar());
+		},
+		() => "ballSpawn",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (and("[outline=black]Ball Spawn: ", v0.GetValue()) + "/5");
+		},
+		() => "spawn small ball new",
+		() => "smallBallDelay",
+		() => 0.3,
+		() => 355,
+		() => 80,
+		() => 1340,
+		() => 354,
+		() => 420,
+		() => "hide setting",
+		() => 100,
+		() => "show setting",
 		() => "debug",
 		p => {
 			const n0 = p._GetNode(0);
@@ -8399,60 +8448,11 @@ self.C3_ExpressionFuncs = [
 			return () => and("Look Y : ", n0.ExpObject());
 		},
 		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => (f0() % 2);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => and("[outline=black]FPS : ", f0());
-		},
-		() => "small",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => and("[outline=black]Small Ball : ", n0.ExpObject());
-		},
-		() => "big",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => and("[outline=black]Big Ball : ", n0.ExpObject());
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (and("[outline=black]Big Ball : ", n0.ExpObject()) + " (max)");
-		},
-		() => "total",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => and("[outline=black]Total Ball : ", (n0.ExpObject() + n1.ExpObject()));
-		},
-		() => "bigBallSaved",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => and("[outline=black]Big Ball Saved : ", n0.ExpInstVar());
-		},
-		() => "ballSpawn",
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (and("[outline=black]Ball Spawn: ", v0.GetValue()) + "/5");
-		},
-		p => {
 			const n0 = p._GetNode(0);
 			return () => and("Speed Move : ", n0.ExpObject());
 		},
 		() => "spawn small ball old",
-		() => 355,
-		() => 80,
-		() => 1340,
 		() => 2,
-		() => "spawn small ball new",
-		() => "smallBallDelay",
-		() => 0.3,
-		() => 354,
-		() => 420,
-		() => "hide setting",
-		() => 100,
-		() => "show setting",
 		() => "loader",
 		() => 60,
 		() => 360,
@@ -8684,6 +8684,14 @@ self.C3_ExpressionFuncs = [
 		() => "cek2",
 		() => "staticGate",
 		() => 150,
+		() => 40,
+		() => 715,
+		() => "ball2D_1",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 200);
+		},
+		() => "HOOBLAA",
 		() => "static gate",
 		p => {
 			const n0 = p._GetNode(0);
@@ -8780,13 +8788,6 @@ self.C3_ExpressionFuncs = [
 			const n5 = p._GetNode(5);
 			const n6 = p._GetNode(6);
 			return () => (f0("ball2D_2", f1("ball3D", n2.ExpObject(), n3.ExpObject()), f4("ball3D", n5.ExpObject(), n6.ExpObject())) - 25);
-		},
-		() => 40,
-		() => 715,
-		() => "ball2D_1",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() + 200);
 		},
 		p => {
 			const n0 = p._GetNode(0);
