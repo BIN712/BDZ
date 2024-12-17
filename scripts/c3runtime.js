@@ -7243,6 +7243,13 @@ self.C3_ExpressionFuncs = [
 		() => "bigBall.",
 		() => "bigBall",
 		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			return () => f0(n1.ExpObject((and(v2.GetValue(), v3.GetValue()) + ".zElevation")));
+		},
+		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("stakeBlue");
 		},
@@ -7436,6 +7443,7 @@ self.C3_ExpressionFuncs = [
 		() => 1340,
 		() => 354,
 		() => 420,
+		() => 150,
 		() => "hide setting",
 		() => 100,
 		() => "show setting",
@@ -7703,7 +7711,6 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => f0(n1.ExpObject("smallBall.onReady.angularDamping"));
 		},
-		() => "cek1",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
@@ -7729,9 +7736,7 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => f0(n1.ExpObject("smallBall.onBonus.angularDamping"));
 		},
-		() => "cek2",
 		() => "staticGate",
-		() => 150,
 		() => 40,
 		() => 715,
 		() => "ball2D_1",
@@ -7739,7 +7744,6 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 200);
 		},
-		() => "HOOBLAA",
 		() => "static gate",
 		p => {
 			const n0 = p._GetNode(0);
@@ -7836,6 +7840,29 @@ self.C3_ExpressionFuncs = [
 			const n6 = p._GetNode(6);
 			return () => (f0("ball2D_2", f1("ball3D", n2.ExpObject(), n3.ExpObject()), f4("ball3D", n5.ExpObject(), n6.ExpObject())) - 25);
 		},
+		() => "input last",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			const f4 = p._GetNode(4).GetBoundMethod();
+			const n5 = p._GetNode(5);
+			const n6 = p._GetNode(6);
+			const n7 = p._GetNode(7);
+			return () => Math.abs((f0("ball2D_2", f1("ball3D", n2.ExpObject(), n3.ExpObject()), f4("ball3D", n5.ExpObject(), n6.ExpObject())) - n7.ExpInstVar()));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			const f4 = p._GetNode(4).GetBoundMethod();
+			const n5 = p._GetNode(5);
+			const n6 = p._GetNode(6);
+			const n7 = p._GetNode(7);
+			return () => Math.abs(((f0("ball2D_2", f1("ball3D", n2.ExpObject(), n3.ExpObject()), f4("ball3D", n5.ExpObject(), n6.ExpObject())) - 25) - n7.ExpInstVar()));
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
@@ -7848,13 +7875,23 @@ self.C3_ExpressionFuncs = [
 			const f8 = p._GetNode(8).GetBoundMethod();
 			return () => C3.lerp(n0.ExpObject(), (f1("ball2D_2", f2("ball3D", n3.ExpObject(), n4.ExpObject()), f5("ball3D", n6.ExpObject(), n7.ExpObject())) + 7), (f8() * 32));
 		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			const f4 = p._GetNode(4).GetBoundMethod();
+			const n5 = p._GetNode(5);
+			const n6 = p._GetNode(6);
+			const n7 = p._GetNode(7);
+			return () => ((f0("ball2D_2", f1("ball3D", n2.ExpObject(), n3.ExpObject()), f4("ball3D", n5.ExpObject(), n6.ExpObject())) - 25) - n7.ExpInstVar());
+		},
 		() => "setting",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			return () => f0(n1.ExpObject("gravity"));
-		},
-		() => 14
+		}
 ];
 
 

@@ -56,7 +56,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Json.Cnds.ForEach,
 		C3.Plugins.System.Exps.int,
 		C3.Plugins.System.Acts.AddVar,
-		C3.Plugins.Mikal_3DObject.Acts.SetZElevation0,
 		C3.Plugins.Sprite.Acts.SetInstanceVar,
 		C3.Plugins.Shape3D.Acts.SetInstanceVar,
 		C3.Plugins.Json.Acts.SetValue,
@@ -85,6 +84,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Timer.Cnds.IsTimerRunning,
 		C3.Behaviors.Timer.Acts.StartTimer,
 		C3.Behaviors.Timer.Cnds.OnTimer,
+		C3.Plugins.Mikal_3DObject.Acts.SetZElevation0,
 		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.Button.Cnds.IsBoolInstanceVarSet,
 		C3.Plugins.Button.Acts.SetBoolInstanceVar,
@@ -166,14 +166,14 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.canvastolayery,
 		C3.Plugins.System.Exps.dt,
 		C3.Plugins.System.Acts.SortZOrderByInstVar,
-		C3.Plugins.AJAX.Acts.RequestFile,
-		C3.Plugins.PlatformInfo.Acts.RequestWakeLock,
-		C3.Plugins.AJAX.Cnds.OnComplete,
-		C3.Plugins.AJAX.Exps.LastData,
-		C3.Plugins.System.Acts.GoToLayout,
 		C3.Plugins.Browser.Cnds.OnUpdateFound,
 		C3.Plugins.Browser.Cnds.OnOfflineReady,
-		C3.Plugins.Browser.Acts.Reload
+		C3.Plugins.Browser.Acts.Reload,
+		C3.Plugins.PlatformInfo.Acts.RequestWakeLock,
+		C3.Plugins.AJAX.Acts.RequestFile,
+		C3.Plugins.AJAX.Cnds.OnComplete,
+		C3.Plugins.AJAX.Exps.LastData,
+		C3.Plugins.System.Acts.GoToLayout
 	];
 };
 self.C3_JsPropNameTable = [
@@ -281,6 +281,8 @@ self.C3_JsPropNameTable = [
 	{LocalStorage: 0},
 	{BTN_Clear: 0},
 	{selfY: 0},
+	{lastX: 0},
+	{lastY: 0},
 	{OBJ_SmallBall2D: 0},
 	{Mouse: 0},
 	{OBJ_triggerZonk1: 0},
