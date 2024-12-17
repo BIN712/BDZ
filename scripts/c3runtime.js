@@ -3430,320 +3430,6 @@ const C3=self.C3,GESTURE_HOLD_THRESHOLD=15,GESTURE_HOLD_TIMEOUT=500,GESTURE_TAP_
 {const a=self.C3;a.Plugins.PlatformInfo=class extends a.SDKPluginBase{constructor(e){super(e)}Release(){super.Release()}}}{const d=self.C3;d.Plugins.PlatformInfo.Type=class extends d.SDKTypeBase{constructor(e){super(e)}Release(){super.Release()}OnCreate(){}}}{const g=self.C3,h="platform-info";g.Plugins.PlatformInfo.Instance=class extends g.SDKInstanceBase{constructor(e,t){super(e,h),this._screenWidth=0,this._screenHeight=0,this._windowOuterWidth=0,this._windowOuterHeight=0,this._safeAreaInset=[0,0,0,0],this._supportsWakeLock=!1,this._isWakeLockActive=!1,this.AddDOMMessageHandlers([["window-resize",e=>this._OnWindowResize(e)],["wake-lock-acquired",e=>this._OnWakeLockAcquired(e)],["wake-lock-error",e=>this._OnWakeLockError(e)],["wake-lock-released",e=>this._OnWakeLockReleased(e)]]),navigator.connection&&navigator.connection.addEventListener("change",()=>this._OnNetworkChange()),this._runtime.AddLoadPromise(this.PostToDOMAsync("get-initial-state").then(e=>{this._screenWidth=e["screenWidth"],this._screenHeight=e["screenHeight"],this._windowOuterWidth=e["windowOuterWidth"],this._windowOuterHeight=e["windowOuterHeight"],this._safeAreaInset=e["safeAreaInset"],this._supportsWakeLock=e["supportsWakeLock"]}))}Release(){super.Release()}_OnWindowResize(e){this._windowOuterWidth=e["windowOuterWidth"],this._windowOuterHeight=e["windowOuterHeight"],this._safeAreaInset=e["safeAreaInset"]}async _OnNetworkChange(){await this.TriggerAsync(g.Plugins.PlatformInfo.Cnds.OnNetworkChange)}async _OnWakeLockAcquired(){this._isWakeLockActive=!0,await this.TriggerAsync(g.Plugins.PlatformInfo.Cnds.OnWakeLockAcquired)}async _OnWakeLockError(){this._isWakeLockActive=!1,await this.TriggerAsync(g.Plugins.PlatformInfo.Cnds.OnWakeLockError)}async _OnWakeLockReleased(){this._isWakeLockActive=!1,await this.TriggerAsync(g.Plugins.PlatformInfo.Cnds.OnWakeLockReleased)}}}{const r=self.C3;r.Plugins.PlatformInfo.Cnds={IsOnMobile(){return r.Platform.IsMobile},IsOnWindows(){return"Windows"===r.Platform.OS},IsOnMacOS(){return"macOS"===r.Platform.OS},IsOnLinux(){return"Linux"===r.Platform.OS},IsOnChromeOS(){return"Chrome OS"===r.Platform.OS},IsOnAndroid(){return"Android"===r.Platform.OS},IsOniOS(){return"iOS"===r.Platform.OS},IsWebExport(){const e=this._runtime.GetExportType();return"html5"===e||"scirra-arcade"===e||"preview"===e||"instant-games"===e},IsCordovaExport(){return this._runtime.IsCordova()},IsNWjsExport(){return this._runtime.IsNWjs()},IsWindowsUWPExport(){return"windows-uwp"===this._runtime.GetExportType()},IsWindowsWebView2Export(){return this._runtime.IsWindowsWebView2()},IsMacOSWKWebView2Export(){return"macos-wkwebview"===this._runtime.GetExportType()},IsLinuxCEFExport(){return"linux-cef"===this._runtime.GetExportType()},OnNetworkChange(){return!0},OnWakeLockAcquired(){return!0},OnWakeLockError(){return!0},OnWakeLockReleased(){return!0},IsWakeLockActive(){return this._isWakeLockActive},IsWakeLockSupported(){return this._supportsWakeLock}}}{const t=self.C3;t.Plugins.PlatformInfo.Acts={RequestWakeLock(){this._supportsWakeLock&&this._PostToDOMMaybeSync("request-wake-lock")},ReleaseWakeLock(){this._supportsWakeLock&&(this._isWakeLockActive=!1,this.PostToDOM("release-wake-lock"))}}}{const u=self.C3;u.Plugins.PlatformInfo.Exps={Renderer(){return this._runtime.GetCanvasManager().GetRendererString()},RendererDetail(){return this._runtime.GetCanvasManager().GetRendererDetailString()},DevicePixelRatio(){return this._runtime.GetDevicePixelRatio()},ScreenWidth(){return this._screenWidth},ScreenHeight(){return this._screenHeight},WindowInnerWidth(){return this._runtime.GetCanvasManager().GetLastWidth()},WindowInnerHeight(){return this._runtime.GetCanvasManager().GetLastHeight()},WindowOuterWidth(){return this._windowOuterWidth},WindowOuterHeight(){return this._windowOuterHeight},CanvasCssWidth(){return this._runtime.GetCanvasManager().GetCssWidth()},CanvasCssHeight(){return this._runtime.GetCanvasManager().GetCssHeight()},CanvasDeviceWidth(){return this._runtime.GetCanvasManager().GetDeviceWidth()},CanvasDeviceHeight(){return this._runtime.GetCanvasManager().GetDeviceHeight()},Downlink(){return navigator.connection&&navigator.connection["downlink"]||0},DownlinkMax(){return navigator.connection&&navigator.connection["downlinkMax"]||0},ConnectionType(){return navigator.connection&&navigator.connection["type"]||"unknown"},ConnectionEffectiveType(){return navigator.connection&&navigator.connection["effectiveType"]||"unknown"},ConnectionRTT(){return navigator.connection&&navigator.connection["rtt"]||0},HardwareConcurrency(){return navigator.hardwareConcurrency||0},DeviceMemory(){return navigator.deviceMemory||0},SafeAreaInsetTop(){return this._safeAreaInset[0]},SafeAreaInsetRight(){return this._safeAreaInset[1]},SafeAreaInsetBottom(){return this._safeAreaInset[2]},SafeAreaInsetLeft(){return this._safeAreaInset[3]},FramesPerSecond(){return this._runtime.GetFramesPerSecond()},TicksPerSecond(){return this._runtime.GetTicksPerSecond()}}}
 }
 
-// scripts/plugins/skymen_limit_fps/c3runtime/plugin.js
-{
-const C3 = self.C3;
-
-const PLUGIN_INFO = {
-  id: "skymen_limit_fps",
-  type: "object",
-  hasDomSide: false,
-  Acts: {
-    "SetMaxFPS": {
-          "forward": (inst) => inst._SetMaxFPS,
-          
-          "autoScriptInterface": true,
-          }
-  },
-  Cnds: {
-    
-  },
-  Exps: {
-    "MaxFPS": {
-          "forward": (inst) => inst._MaxFPS,
-          
-          "autoScriptInterface": true,
-        }
-  },
-};
-
-const camelCasedMap = new Map();
-
-function camelCasify(str) {
-  // If the string is already camelCased, return it
-  if (camelCasedMap.has(str)) {
-    return camelCasedMap.get(str);
-  }
-  // Replace any non-valid JavaScript identifier characters with spaces
-  let cleanedStr = str.replace(/[^a-zA-Z0-9$_]/g, " ");
-
-  // Split the string on spaces
-  let words = cleanedStr.split(" ").filter(Boolean);
-
-  // Capitalize the first letter of each word except for the first one
-  for (let i = 1; i < words.length; i++) {
-    words[i] = words[i].charAt(0).toUpperCase() + words[i].substring(1);
-  }
-
-  // Join the words back together
-  let result = words.join("");
-
-  // If the first character is a number, prepend an underscore
-  if (!isNaN(parseInt(result.charAt(0)))) {
-    result = "_" + result;
-  }
-
-  camelCasedMap.set(str, result);
-
-  return result;
-}
-
-const parentClass = {
-  object: {
-    scripting: self.IInstance,
-    instance: C3.SDKInstanceBase,
-    plugin: C3.SDKPluginBase,
-  },
-  world: {
-    scripting: self.IWorldInstance,
-    instance: C3.SDKWorldInstanceBase,
-    plugin: C3.SDKPluginBase,
-  },
-  dom: {
-    scripting: self.IDOMInstance,
-    instance: C3.SDKDOMInstanceBase,
-    plugin: C3.SDKDOMPluginBase,
-  },
-};
-
-C3.Plugins[PLUGIN_INFO.id] = class extends (
-  parentClass[PLUGIN_INFO.type].plugin
-) {
-  constructor(opts) {
-    if (PLUGIN_INFO.hasDomSide) {
-      super(opts, PLUGIN_INFO.id);
-    } else {
-      super(opts);
-    }
-  }
-
-  Release() {
-    super.Release();
-  }
-};
-const P_C = C3.Plugins[PLUGIN_INFO.id];
-P_C.Type = class extends C3.SDKTypeBase {
-  constructor(objectClass) {
-    super(objectClass);
-  }
-
-  Release() {
-    super.Release();
-  }
-
-  OnCreate() {}
-};
-
-//====== SCRIPT INTERFACE ======
-const map = new WeakMap();
-
-function getScriptInterface(parentClass, map) {
-  return class extends parentClass {
-    constructor() {
-      super();
-      map.set(this, parentClass._GetInitInst().GetSdkInstance());
-    }
-  };
-}
-
-
-const scriptInterface = getScriptInterface(
-  parentClass[PLUGIN_INFO.type].scripting,
-  map
-);
-
-// extend script interface with plugin actions
-Object.keys(PLUGIN_INFO.Acts).forEach((key) => {
-  const ace = PLUGIN_INFO.Acts[key];
-  if (!ace.autoScriptInterface) return;
-  scriptInterface.prototype[camelCasify(key)] = function (...args) {
-    const sdkInst = map.get(this);
-    P_C.Acts[camelCasify(key)].call(sdkInst, ...args);
-  };
-});
-
-const addonTriggers = [];
-
-// extend script interface with plugin conditions
-Object.keys(PLUGIN_INFO.Cnds).forEach((key) => {
-  const ace = PLUGIN_INFO.Cnds[key];
-  if (!ace.autoScriptInterface || ace.isStatic || ace.isLooping) return;
-  if (ace.isTrigger) {
-    scriptInterface.prototype[camelCasify(key)] = function (callback, ...args) {
-      const callbackWrapper = () => {
-        const sdkInst = map.get(this);
-        if (P_C.Cnds[camelCasify(key)].call(sdkInst, ...args)) {
-          callback();
-        }
-      };
-      this.addEventListener(key, callbackWrapper, false);
-      return () => this.removeEventListener(key, callbackWrapper, false);
-    };
-  } else {
-    scriptInterface.prototype[key] = function (...args) {
-      const sdkInst = map.get(this);
-      return P_C.Cnds[camelCasify(key)].call(sdkInst, ...args);
-    };
-  }
-});
-
-// extend script interface with plugin expressions
-Object.keys(PLUGIN_INFO.Exps).forEach((key) => {
-  const ace = PLUGIN_INFO.Exps[key];
-  if (!ace.autoScriptInterface) return;
-  scriptInterface.prototype[camelCasify(key)] = function (...args) {
-    const sdkInst = map.get(this);
-    return P_C.Exps[camelCasify(key)].call(sdkInst, ...args);
-  };
-});
-//====== SCRIPT INTERFACE ======
-
-//============ ACES ============
-P_C.Acts = {};
-P_C.Cnds = {};
-P_C.Exps = {};
-Object.keys(PLUGIN_INFO.Acts).forEach((key) => {
-  const ace = PLUGIN_INFO.Acts[key];
-  P_C.Acts[camelCasify(key)] = function (...args) {
-    if (ace.forward) ace.forward(this).call(this, ...args);
-    else if (ace.handler) ace.handler.call(this, ...args);
-  };
-});
-Object.keys(PLUGIN_INFO.Cnds).forEach((key) => {
-  const ace = PLUGIN_INFO.Cnds[key];
-  P_C.Cnds[camelCasify(key)] = function (...args) {
-    if (ace.forward) return ace.forward(this).call(this, ...args);
-    if (ace.handler) return ace.handler.call(this, ...args);
-  };
-  if (ace.isTrigger && ace.autoScriptInterface) {
-    addonTriggers.push({
-      method: P_C.Cnds[camelCasify(key)],
-      id: key,
-    });
-  }
-});
-Object.keys(PLUGIN_INFO.Exps).forEach((key) => {
-  const ace = PLUGIN_INFO.Exps[key];
-  P_C.Exps[camelCasify(key)] = function (...args) {
-    if (ace.forward) return ace.forward(this).call(this, ...args);
-    if (ace.handler) return ace.handler.call(this, ...args);
-  };
-});
-//============ ACES ============
-
-function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
-  return class extends parentClass {
-    constructor(inst, properties) {
-      super(inst);
-
-      this.maxFPS = 10;
-
-      if (properties) {
-        this.maxFPS = properties[0];
-      }
-
-      let lastTime = performance.now();
-      const oldFn = this._runtime.Tick.bind(this._runtime);
-
-      this._runtime.Tick = async (...args) => {
-        const now = args[0];
-        const timeDelta = now - lastTime;
-        const frameTime = 1000 / this.maxFPS;
-        if (this.maxFPS <= 0 || timeDelta >= frameTime) {
-          lastTime = now;
-          await oldFn(...args);
-        } else {
-          C3.RequestUnlimitedAnimationFrame((timestamp) => {
-            args[0] = timestamp;
-            this._runtime._rafId = -1;
-            this._runtime._ruafId = -1;
-            this._runtime.Tick(...args);
-          });
-          /* setTimeout(() => {
-            requestAnimationFrame((timestamp) => {
-              args[0] = timestamp
-              this._runtime.Tick(...args);
-            });
-            // args[0] = Date.now() / 1000;
-            // this._runtime.Tick(...args);
-          }, (now - lastTime - 1 / this.maxFPS) * 1000 - 1); */
-        }
-      };
-    }
-
-    Release() {
-      super.Release();
-    }
-
-    SaveToJson() {
-      return {
-        // save state for savegames
-        maxFPS: this.maxFPS,
-      };
-    }
-
-    LoadFromJson(o) {
-      // load state for savegames
-      this.maxFPS = o.maxFPS;
-    }
-
-    Trigger(method) {
-      super.Trigger(method);
-      const addonTrigger = addonTriggers.find((x) => x.method === method);
-      if (addonTrigger) {
-        this.GetScriptInterface().dispatchEvent(new C3.Event(addonTrigger.id));
-      }
-    }
-
-    GetScriptInterfaceClass() {
-      return scriptInterface;
-    }
-
-    _SetMaxFPS(maxFPS) {
-      this.maxFPS = maxFPS;
-    }
-
-    _MaxFPS() {
-      return this.maxFPS;
-    }
-  };
-}
-
-
-P_C.Instance = getInstanceJs(
-  parentClass[PLUGIN_INFO.type].instance,
-  scriptInterface,
-  addonTriggers,
-  C3
-);
-
-}
-
-// scripts/plugins/skymen_limit_fps/c3runtime/type.js
-{
-
-}
-
-// scripts/plugins/skymen_limit_fps/c3runtime/instance.js
-{
-
-}
-
-// scripts/plugins/skymen_limit_fps/c3runtime/conditions.js
-{
-
-}
-
-// scripts/plugins/skymen_limit_fps/c3runtime/actions.js
-{
-
-}
-
-// scripts/plugins/skymen_limit_fps/c3runtime/expressions.js
-{
-
-}
-
 // scripts/behaviors/mikal_cannon_3d_physics/c3runtime/behavior.js
 {
 // import * as Comlink from "https://cdn.skypack.dev/comlink";
@@ -7049,7 +6735,6 @@ function or(l, r)
 
 self.C3_ExpressionFuncs = [
 		() => "performance",
-		() => 60,
 		() => "Save",
 		() => "MySave",
 		() => "ball3D",
@@ -7276,7 +6961,10 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => n0.ExpObject(and("stakeRed.", n1.ExpInstVar()));
 		},
-		() => 5,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("partyTimeActive");
+		},
 		() => "[outline=white]0",
 		p => {
 			const n0 = p._GetNode(0);
@@ -7324,10 +7012,6 @@ self.C3_ExpressionFuncs = [
 		() => "stakeYellow",
 		() => "stakeRed",
 		() => "ballRemain",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject("partyTimeActive");
-		},
 		() => "PT_xNum",
 		() => "PT_ticket",
 		() => "triggerXnum1",
@@ -7435,9 +7119,10 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			return () => (and("[outline=black]Ball Spawn: ", v0.GetValue()) + "/5");
 		},
+		() => 5,
 		() => "spawn small ball new",
 		() => "smallBallDelay",
-		() => 0.3,
+		() => 0.5,
 		() => 355,
 		() => 80,
 		() => 1340,
@@ -7633,12 +7318,14 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("bigBall.onReady.angularDamping");
 		},
+		() => 60,
 		() => 1120,
 		() => -10,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(999, 9999);
 		},
+		() => 0.3,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() - 5);
