@@ -170,6 +170,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Browser.Cnds.OnOfflineReady,
 		C3.Plugins.Browser.Acts.Reload,
 		C3.Plugins.PlatformInfo.Acts.RequestWakeLock,
+		C3.Plugins.PlatformInfo.Cnds.IsOniOS,
+		C3.Plugins.System.Acts.SetDeltaTimeMinMax,
 		C3.Plugins.AJAX.Acts.RequestFile,
 		C3.Plugins.AJAX.Cnds.OnComplete,
 		C3.Plugins.AJAX.Exps.LastData,
