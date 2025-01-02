@@ -7231,20 +7231,13 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
 			const v2 = p._GetNode(2).GetVar();
-			return () => n0.ExpObject((and(v1.GetValue(), v2.GetValue()) + ".bonus"));
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const n1 = p._GetNode(1);
-			const v2 = p._GetNode(2).GetVar();
-			const v3 = p._GetNode(3).GetVar();
-			return () => (f0(n1.ExpObject((and(v2.GetValue(), v3.GetValue()) + ".zElevation"))) + 50);
+			return () => n0.ExpObject((and(v1.GetValue(), v2.GetValue()) + ".zElevation"));
 		},
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
 			const v2 = p._GetNode(2).GetVar();
-			return () => n0.ExpObject((and(v1.GetValue(), v2.GetValue()) + ".zElevation"));
+			return () => n0.ExpObject((and(v1.GetValue(), v2.GetValue()) + ".bonus"));
 		},
 		() => "bigBall.",
 		() => "bigBall",
@@ -7446,6 +7439,7 @@ self.C3_ExpressionFuncs = [
 		() => 0.5,
 		() => 360,
 		() => 80,
+		() => "main",
 		() => 1340,
 		() => 355,
 		() => "ball2D_1",
@@ -7456,9 +7450,9 @@ self.C3_ExpressionFuncs = [
 		() => 354,
 		() => 420,
 		() => 150,
+		() => "show setting",
 		() => "hide setting",
 		() => 100,
-		() => "show setting",
 		() => "debug",
 		p => {
 			const n0 = p._GetNode(0);
@@ -7559,6 +7553,7 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("smallBall.onBonus.angularDamping");
 		},
+		() => 60,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("smallBall.onReady.mass");
@@ -7644,7 +7639,6 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("bigBall.onReady.angularDamping");
 		},
-		() => 60,
 		() => 1120,
 		() => -10,
 		p => {
@@ -7667,7 +7661,7 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(0, 110, 255);
 		},
-		() => 500,
+		() => 450,
 		() => 1170,
 		() => "biru party",
 		p => {
@@ -7833,7 +7827,7 @@ self.C3_ExpressionFuncs = [
 		() => 120,
 		p => {
 			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 60);
+			return () => (n0.ExpObject() - 50);
 		},
 		() => 9,
 		() => "neon",
@@ -7860,6 +7854,10 @@ self.C3_ExpressionFuncs = [
 		},
 		() => 81,
 		() => 46,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 120);
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() * 4);
