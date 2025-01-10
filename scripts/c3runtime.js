@@ -7898,7 +7898,6 @@ self.C3_ExpressionFuncs = [
 		() => "exitStaticGateBall",
 		() => 104,
 		() => 747,
-		() => "UI2D_3",
 		() => "exitStaticGateTicket",
 		() => 614,
 		() => "projeksi ke 2D",
