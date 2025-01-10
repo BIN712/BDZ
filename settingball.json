@@ -48,7 +48,7 @@
 		},
 		"onBonus": {
 			"mass": 40,
-			"friction": 1,
+			"friction": 0.5,
 			"restitution": 0.8,
 			"linearDamping": 1,
 			"angularDamping": 1

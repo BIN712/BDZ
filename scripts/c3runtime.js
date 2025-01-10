@@ -7084,10 +7084,6 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => and("[outline=white]", v0.GetValue());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
 			return () => v0.GetValue();
 		},
 		p => {
@@ -7097,6 +7093,10 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("ticket");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("jackpot");
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -7279,7 +7279,6 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("partyTimeActive");
 		},
-		() => "[outline=white]0",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("ticket.0");
@@ -7322,6 +7321,7 @@ self.C3_ExpressionFuncs = [
 		() => "triggerTicket1.",
 		() => "triggerTicket2.",
 		() => "ticket",
+		() => "jackpot",
 		() => "stakeBlue",
 		() => "stakeYellow",
 		() => "stakeRed",
@@ -7395,6 +7395,7 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("partyTimeDuration");
 		},
+		() => "partyTime",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0() % 2);
@@ -7553,7 +7554,7 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("smallBall.onBonus.angularDamping");
 		},
-		() => 60,
+		() => 55,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("smallBall.onReady.mass");
@@ -7598,7 +7599,6 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject(and("spinSpeedMove.", v1.GetValue()));
 		},
 		() => "big ball",
-		() => 55,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("bigBall.onSpin.mass");
@@ -7639,6 +7639,7 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("bigBall.onReady.angularDamping");
 		},
+		() => 60,
 		() => 1120,
 		() => -10,
 		p => {
@@ -7657,17 +7658,16 @@ self.C3_ExpressionFuncs = [
 		() => 0.15,
 		() => "30",
 		() => "biru",
+		() => 180,
 		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(0, 110, 255);
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(1);
 		},
-		() => 450,
-		() => 1170,
 		() => "biru party",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
-			return () => (n0.ExpObject() + (n1.ExpObject() / 10));
+			return () => n0.ExpObject((n1.ExpInstVar() + 1));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -7675,11 +7675,13 @@ self.C3_ExpressionFuncs = [
 			const n2 = p._GetNode(2);
 			return () => (((((n0.ExpInstVar() + 1)) === (n1.ExpObject("stakeBlue")) ? 1 : 0)) ? (0) : ((n2.ExpInstVar() + 1)));
 		},
-		() => "kuning",
 		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(228, 193, 39);
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => (n0.ExpObject() + (n1.ExpObject() / 10));
 		},
+		() => "kuning",
+		() => 230,
 		() => "kuning party",
 		p => {
 			const n0 = p._GetNode(0);
@@ -7688,11 +7690,10 @@ self.C3_ExpressionFuncs = [
 			return () => (((((n0.ExpInstVar() + 1)) === (n1.ExpObject("stakeYellow")) ? 1 : 0)) ? (0) : ((n2.ExpInstVar() + 1)));
 		},
 		() => "merah",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(251, 9, 29);
-		},
+		() => 500,
 		() => "merah party",
+		() => 450,
+		() => 1170,
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -7774,6 +7775,14 @@ self.C3_ExpressionFuncs = [
 		() => "static gate",
 		p => {
 			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => Math.abs((n0.ExpObject() - n1.ExpInstVar()));
 		},
@@ -7827,6 +7836,10 @@ self.C3_ExpressionFuncs = [
 		() => 120,
 		p => {
 			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 30);
+		},
+		p => {
+			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() - 50);
 		},
 		() => 9,
@@ -7846,6 +7859,7 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => n0.ExpObject(and("stakeRedParty.", n1.ExpInstVar()));
 		},
+		() => "Default",
 		() => "default",
 		() => "UI_Neon",
 		p => {
@@ -7858,12 +7872,35 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() - 120);
 		},
+		() => "entryJackpot",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() * 4);
 		},
 		() => 0.8,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() * 2);
+		},
+		() => 0.4,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 100);
+		},
+		() => "entryStaticGateBall",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 30);
+		},
+		() => "entryStaticGateTicket",
 		() => "Exit",
+		() => "ExitJackpot",
+		() => "exitStaticGateBall",
+		() => 104,
+		() => 747,
+		() => "UI2D_3",
+		() => "exitStaticGateTicket",
+		() => 614,
 		() => "projeksi ke 2D",
 		() => -5000,
 		p => {
