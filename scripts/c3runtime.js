@@ -7096,7 +7096,8 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject("jackpot");
+			const n1 = p._GetNode(1);
+			return () => ((((n0.ExpObject("jackpot")) <= (500) ? 1 : 0)) ? (500) : (n1.ExpObject("jackpot")));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -7524,11 +7525,11 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => ("[outline=black]version " + f0());
 		},
-		() => 3,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0("UI");
 		},
+		() => 3,
 		() => "UI",
 		() => "loadSmallBall",
 		() => "loadBigBall",
@@ -7663,7 +7664,6 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject(1);
 		},
-		() => "biru party",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -7872,15 +7872,18 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() - 120);
 		},
-		() => "entryJackpot",
 		p => {
 			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() * 4);
+			return () => (n0.ExpObject() * 2);
 		},
 		() => 0.8,
 		p => {
 			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() * 2);
+			return () => and("[color=white][outline=black][linethickness=0.3]+", n0.ExpInstVar());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() * 4);
 		},
 		() => 0.4,
 		p => {
@@ -7890,16 +7893,31 @@ self.C3_ExpressionFuncs = [
 		() => "entryStaticGateBall",
 		p => {
 			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() * 1.5);
+		},
+		p => {
+			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() - 30);
 		},
 		() => "entryStaticGateTicket",
-		() => "Exit",
-		() => "ExitJackpot",
 		() => "exitStaticGateBall",
 		() => 104,
 		() => 747,
 		() => "exitStaticGateTicket",
 		() => 614,
+		() => "Animasi Ticket",
+		() => "Exit",
+		() => "counting",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0(n1.ExpObject());
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0(n1.ExpBehavior("counting"));
+		},
 		() => "projeksi ke 2D",
 		() => -5000,
 		p => {
@@ -7974,7 +7992,8 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			return () => f0(n1.ExpObject("gravity"));
-		}
+		},
+		() => 300
 ];
 
 
