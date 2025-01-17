@@ -1203,6 +1203,36 @@ const C3=self.C3;C3.JobSchedulerRuntime=class extends C3.DefendedBase{constructo
 // scripts/shaders.js
 {
 self["C3_Shaders"] = {};
+self["C3_Shaders"]["glowhorizontal"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform mediump sampler2D samplerFront;\nuniform mediump vec2 pixelSize;\nuniform mediump float intensity;\nvoid main(void)\n{\nmediump vec4 sum = vec4(0.0);\nmediump float pixelWidth = pixelSize.x;\nmediump float halfPixelWidth = pixelWidth / 2.0;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 7.0 + halfPixelWidth, 0.0)) * 0.06;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 5.0 + halfPixelWidth, 0.0)) * 0.10;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 3.0 + halfPixelWidth, 0.0)) * 0.13;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 1.0 + halfPixelWidth, 0.0)) * 0.16;\nmediump vec4 front = texture2D(samplerFront, vTex);\nsum += front * 0.10;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 1.0 + halfPixelWidth, 0.0)) * 0.16;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 3.0 + halfPixelWidth, 0.0)) * 0.13;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 5.0 + halfPixelWidth, 0.0)) * 0.10;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 7.0 + halfPixelWidth, 0.0)) * 0.06;\ngl_FragColor = mix(front, max(front, sum), intensity);\n}",
+	glslWebGL2: "",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\nintensity : f32\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%C3_UTILITY_FUNCTIONS%%\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@fragment\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar pixelWidth : f32 = c3_getPixelSize(textureFront).x;\nvar front : vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV);\nvar sum : vec4<f32> =\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(pixelWidth * 7.5, 0.0)) * 0.06 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(pixelWidth * 5.5, 0.0)) * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(pixelWidth * 3.5, 0.0)) * 0.13 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(pixelWidth * 1.5, 0.0)) * 0.16 +\nfront * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(pixelWidth * 1.5, 0.0)) * 0.16 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(pixelWidth * 3.5, 0.0)) * 0.13 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(pixelWidth * 5.5, 0.0)) * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(pixelWidth * 7.5, 0.0)) * 0.06;\nvar output : FragmentOutput;\noutput.color = mix(front, max(front, sum), shaderParams.intensity);\nreturn output;\n}",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 8,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: false,
+	supports3dDirectRendering: false,
+	animated: false,
+	parameters: [["intensity",0,"percent"]]
+};
+self["C3_Shaders"]["glowvertical"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform mediump sampler2D samplerFront;\nuniform mediump vec2 pixelSize;\nuniform mediump float intensity;\nvoid main(void)\n{\nmediump vec4 sum = vec4(0.0);\nmediump float pixelHeight = pixelSize.y;\nmediump float halfPixelHeight = pixelHeight / 2.0;\nsum += texture2D(samplerFront, vTex - vec2(0.0, pixelHeight * 7.0 + halfPixelHeight)) * 0.06;\nsum += texture2D(samplerFront, vTex - vec2(0.0, pixelHeight * 5.0 + halfPixelHeight)) * 0.10;\nsum += texture2D(samplerFront, vTex - vec2(0.0, pixelHeight * 3.0 + halfPixelHeight)) * 0.13;\nsum += texture2D(samplerFront, vTex - vec2(0.0, pixelHeight * 1.0 + halfPixelHeight)) * 0.16;\nmediump vec4 front = texture2D(samplerFront, vTex);\nsum += front * 0.10;\nsum += texture2D(samplerFront, vTex + vec2(0.0, pixelHeight * 1.0 + halfPixelHeight)) * 0.16;\nsum += texture2D(samplerFront, vTex + vec2(0.0, pixelHeight * 3.0 + halfPixelHeight)) * 0.13;\nsum += texture2D(samplerFront, vTex + vec2(0.0, pixelHeight * 5.0 + halfPixelHeight)) * 0.10;\nsum += texture2D(samplerFront, vTex + vec2(0.0, pixelHeight * 7.0 + halfPixelHeight)) * 0.06;\ngl_FragColor = mix(front, max(front, sum), intensity);\n}",
+	glslWebGL2: "",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\nstruct ShaderParams {\nintensity : f32\n};\n%%SHADERPARAMS_BINDING%% var<uniform> shaderParams : ShaderParams;\n%%C3_UTILITY_FUNCTIONS%%\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@fragment\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar pixelHeight : f32 = c3_getPixelSize(textureFront).y;\nvar front : vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV);\nvar sum : vec4<f32> =\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(0.0, pixelHeight * 7.5)) * 0.06 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(0.0, pixelHeight * 5.5)) * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(0.0, pixelHeight * 3.5)) * 0.13 +\ntextureSample(textureFront, samplerFront, input.fragUV - vec2<f32>(0.0, pixelHeight * 1.5)) * 0.16 +\nfront * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(0.0, pixelHeight * 1.5)) * 0.16 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(0.0, pixelHeight * 3.5)) * 0.13 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(0.0, pixelHeight * 5.5)) * 0.10 +\ntextureSample(textureFront, samplerFront, input.fragUV + vec2<f32>(0.0, pixelHeight * 7.5)) * 0.06;\nvar output : FragmentOutput;\noutput.color = mix(front, max(front, sum), shaderParams.intensity);\nreturn output;\n}",
+	blendsBackground: false,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 8,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: false,
+	supports3dDirectRendering: false,
+	animated: false,
+	parameters: [["intensity",0,"percent"]]
+};
 
 }
 
@@ -6965,6 +6995,576 @@ const C3=self.C3,NAMESPACE=C3.Behaviors.Tween;NAMESPACE.ValueGetters=class{const
 const C3=self.C3,C3X=self.C3X,IBehaviorInstance=self.IBehaviorInstance,Ease=self.Ease,NAMESPACE=C3.Behaviors.Tween,map=new WeakMap,TWEEN_PROPERTIES=new Map([["x",{name:"offsetX",type:"one"}],["y",{name:"offsetY",type:"one"}],["width",{name:"offsetWidth",type:"one"}],["height",{name:"offsetHeight",type:"one"}],["angle",{name:"offsetAngle",type:"one"}],["opacity",{name:"offsetOpacity",type:"one"}],["color",{name:"offsetColor",type:"color"}],["z-elevation",{name:"offsetZElevation",type:"one"}],["x-scale",{name:"offsetScaleX",type:"one"}],["y-scale",{name:"offsetScaleY",type:"one"}],["position",{name:"position",type:"two"}],["size",{name:"size",type:"two"}],["scale",{name:"scale",type:"two"}],["value",{name:"value",type:"value"}]]);function getIndexForEase(e){C3X.RequireString(e);const t=Ease.ToInternal(e);let n;if(-1===(n=t?Ease.GetIndexForEase(t,null):Ease.GetIndexForEase(e,null)))throw new Error(`invalid ease name '${e}'`);return n}const TWEEN_OPTS={tags:"",destroyOnComplete:!1,loop:!1,pingPong:!1,repeatCount:1,startValue:0},I_TWEEN_OPTS={easeToIndexFunc:getIndexForEase};function ValidateTags(e,t=!1){if(!(t&&null==e||"string"==typeof e||Array.isArray(e)))throw new Error("invalid tags")}self.ITweenBehaviorInstance=class extends IBehaviorInstance{constructor(){super(),map.set(this,IBehaviorInstance._GetInitInst().GetSdkInstance())}startTween(e,t,n,a,o){const s=map.get(this);if(!s.IsEnabled()||!s.IsInstanceValid())return null;const r=TWEEN_PROPERTIES.get(e);if(!r)throw new Error("invalid tween property");"one"===r.type||"value"===r.type?C3X.RequireNumber(t):(C3X.RequireArray(t),"two"===r.type?(C3X.RequireNumber(t[0]),C3X.RequireNumber(t[1])):"color"===r.type&&(C3X.RequireNumber(t[0]),C3X.RequireNumber(t[1]),C3X.RequireNumber(t[2]))),"angle"===e?t=C3.toDegrees(t):"opacity"===e?t*=100:"color"===e&&(t=C3.PackRGBEx(t[0],t[1],t[2]));const l=getIndexForEase(a);C3X.RequireFiniteNumber(n),o=Object.assign({},TWEEN_OPTS,o),"value"===r.type&&C3X.RequireNumber(o.startValue),ValidateTags(o.tags,!0);let i;if("one"===r.type||"color"===r.type?i=s.CreateTween(NAMESPACE.TweenArguments.OneProperty(s,o.tags,r.name,t,n,l,!!o.destroyOnComplete,!!o.loop,!!o.pingPong,o.repeatCount)):"two"===r.type?i=s.CreateTween(NAMESPACE.TweenArguments.TwoProperties(s,o.tags,r.name,t[0],t[1],n,l,!!o.destroyOnComplete,!!o.loop,!!o.pingPong,o.repeatCount)):"value"===r.type&&(i=s.CreateTween(NAMESPACE.TweenArguments.ValueProperty(s,o.tags,o.startValue,t,n,l,!!o.destroyOnComplete,!!o.loop,!!o.pingPong,o.repeatCount))),i.Play())return i.GetITweenState(s,I_TWEEN_OPTS);throw new Error("failed to start tween")}*allTweens(){const e=map.get(this);for(const t of e.AllTweens())yield t.GetITweenState(e,I_TWEEN_OPTS)}*tweensByTags(e){ValidateTags(e);const t=map.get(this);for(const n of t.GetTweens(e))yield n.GetITweenState(t,I_TWEEN_OPTS)}get isEnabled(){return map.get(this).IsEnabled()}set isEnabled(e){map.get(this).SetEnabled(e)}};
 }
 
+// scripts/behaviors/Sin/c3runtime/runtime.js
+{
+{const a=self.C3;a.Behaviors.Sin=class extends a.SDKBehaviorBase{constructor(e){super(e)}Release(){super.Release()}}}{const d=self.C3;d.Behaviors.Sin.Type=class extends d.SDKBehaviorTypeBase{constructor(e){super(e)}Release(){super.Release()}OnCreate(){}}}{const g=self.C3,h=self.C3X,i=self.IBehaviorInstance,j=0,k=1,l=2,m=3,n=4,o=5,p=6,q=7,r=8,s=0,t=1,u=2,v=3,w=4,x=5,y=6,z=7,A=8,B=9,C=0,D=1,E=2,F=3,G=4,H=2*Math.PI,I=Math.PI/2,J=3*Math.PI/2,K=[0,1,8,3,4,2,5,6,9,7],L=(g.Behaviors.Sin.Instance=class extends g.SDKBehaviorInstanceBase{constructor(e,t){super(e),this._i=0,this._movement=0,this._wave=0,this._period=0,this._mag=0,this._isEnabled=!0,this._basePeriod=0,this._basePeriodOffset=0,this._baseMag=0,this._periodRandom=0,this._periodOffsetRandom=0,this._magnitudeRandom=0,this._initialValue=0,this._initialValue2=0,this._lastKnownValue=0,this._lastKnownValue2=0,this._ratio=0,t&&(this._movement=K[t[j]],this._wave=t[k],this._periodRandom=this._runtime.Random()*t[m],this._basePeriod=t[l],this._period=t[l],this._period+=this._periodRandom,this._basePeriodOffset=t[n],0!==this._period&&(this._periodOffsetRandom=this._runtime.Random()*t[o],this._i=t[n]/this._period*H,this._i+=this._periodOffsetRandom/this._period*H),this._magnitudeRandom=this._runtime.Random()*t[q],this._baseMag=t[p],this._mag=t[p],this._mag+=this._magnitudeRandom,this._isEnabled=!!t[r]),this._movement===x&&(this._mag=g.toRadians(this._mag)),this.Init(),this._isEnabled&&this._StartTicking()}Release(){super.Release()}SaveToJson(){return{"i":this._i,"e":this._isEnabled,"mv":this._movement,"w":this._wave,"p":this._period,"mag":this._mag,"iv":this._initialValue,"iv2":this._initialValue2,"r":this._ratio,"lkv":this._lastKnownValue,"lkv2":this._lastKnownValue2}}LoadFromJson(e){this._i=e["i"],this._SetEnabled(e["e"]),this._movement=e["mv"],this._wave=e["w"],this._period=e["p"],this._mag=e["mag"],this._initialValue=e["iv"],this._initialValue2=e["iv2"],this._ratio=e["r"],this._lastKnownValue=e["lkv"],this._lastKnownValue2=e["lkv2"]}Init(){const e=this._inst.GetWorldInfo();switch(this._movement){case s:this._initialValue=e.GetX();break;case t:this._initialValue=e.GetY();break;case u:this._initialValue=e.GetWidth(),this._ratio=e.GetHeight()/e.GetWidth();break;case v:this._initialValue=e.GetWidth();break;case w:this._initialValue=e.GetHeight();break;case x:this._initialValue=e.GetAngle();break;case y:this._initialValue=e.GetOpacity();break;case z:this._initialValue=0;break;case A:this._initialValue=e.GetX(),this._initialValue2=e.GetY();break;case B:this._initialValue=e.GetZElevation()}this._lastKnownValue=this._initialValue,this._lastKnownValue2=this._initialValue2}WaveFunc(e){switch(e%=H,this._wave){case C:return Math.sin(e);case D:return e<=I?e/I:e<=J?1-2*(e-I)/Math.PI:(e-J)/I-1;case E:return 2*e/H-1;case F:return-2*e/H+1;case G:return e<Math.PI?-1:1}return 0}Tick(){const e=this._runtime.GetDt(this._inst);this._isEnabled&&0!==e&&(0===this._period?this._i=0:this._i=(this._i+e/this._period*H)%H,this._UpdateFromPhase())}_UpdateFromPhase(){const e=this._inst.GetWorldInfo();switch(this._movement){case s:e.GetX()!==this._lastKnownValue&&(this._initialValue+=e.GetX()-this._lastKnownValue),e.SetX(this._initialValue+this.WaveFunc(this._i)*this._mag),this._lastKnownValue=e.GetX();break;case t:e.GetY()!==this._lastKnownValue&&(this._initialValue+=e.GetY()-this._lastKnownValue),e.SetY(this._initialValue+this.WaveFunc(this._i)*this._mag),this._lastKnownValue=e.GetY();break;case u:e.SetWidth(this._initialValue+this.WaveFunc(this._i)*this._mag),e.SetHeight(e.GetWidth()*this._ratio);break;case v:e.SetWidth(this._initialValue+this.WaveFunc(this._i)*this._mag);break;case w:e.SetHeight(this._initialValue+this.WaveFunc(this._i)*this._mag);break;case x:e.GetAngle()!==this._lastKnownValue&&(this._initialValue=g.clampAngle(this._initialValue+(e.GetAngle()-this._lastKnownValue))),e.SetAngle(this._initialValue+this.WaveFunc(this._i)*this._mag),this._lastKnownValue=e.GetAngle();break;case y:e.SetOpacity(this._initialValue+this.WaveFunc(this._i)*this._mag/100);break;case A:e.GetX()!==this._lastKnownValue&&(this._initialValue+=e.GetX()-this._lastKnownValue),e.GetY()!==this._lastKnownValue2&&(this._initialValue2+=e.GetY()-this._lastKnownValue2),e.SetX(this._initialValue+Math.cos(e.GetAngle())*this.WaveFunc(this._i)*this._mag),e.SetY(this._initialValue2+Math.sin(e.GetAngle())*this.WaveFunc(this._i)*this._mag),this._lastKnownValue=e.GetX(),this._lastKnownValue2=e.GetY();break;case B:e.SetZElevation(this._initialValue+this.WaveFunc(this._i)*this._mag)}e.SetBboxChanged()}_OnSpriteFrameChanged(e,t){}_SetPeriod(e){this._period=e}_GetPeriod(){return this._period}_SetMagnitude(e){this._mag=e}_SetMagnitude_ConvertAngle(e){5===this._movement&&(e=g.toRadians(e)),this._SetMagnitude(e)}_GetMagnitude(){return this._mag}_GetMagnitude_ConvertAngle(){let e=this._GetMagnitude();return e=5===this._movement?g.toDegrees(e):e}_SetMovement(e){5===this._movement&&5!==e&&(this._mag=g.toDegrees(this._mag)),this._movement=e,this.Init()}_GetMovement(){return this._movement}_SetWave(e){this._wave=e}_GetWave(){return this._wave}_SetPhase(e){this._i=g.clamp(e,0,2*Math.PI),this._UpdateFromPhase()}_GetPhase(){return this._i}_SetEnabled(e){this._isEnabled=!!e,this._isEnabled?this._StartTicking():this._StopTicking()}_IsEnabled(){return this._isEnabled}GetPropertyValueByIndex(e){switch(e){case j:return this._movement;case k:return this._wave;case l:return this._basePeriod;case p:return this._baseMag;case r:return this._isEnabled}}SetPropertyValueByIndex(e,t){switch(e){case j:this._movement=K[t],this.Init();break;case k:this._wave=t;break;case l:this._basePeriod=t,this._period=this._basePeriod+this._periodRandom,this._isEnabled||(0!==this._period?(this._i=this._basePeriodOffset/this._period*H,this._i+=this._periodOffsetRandom/this._period*H):this._i=0);break;case p:this._baseMag=t,this._mag=this._baseMag+this._magnitudeRandom,this._movement===x&&(this._mag=g.toRadians(this._mag));break;case r:this._isEnabled=!!t}}GetDebuggerProperties(){const e="behaviors.sin";return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:e+".properties.enabled.name",value:this._IsEnabled(),onedit:e=>this._SetEnabled(e)},{name:e+".properties.period.name",value:this._GetPeriod(),onedit:e=>this._SetPeriod(e)},{name:e+".properties.magnitude.name",value:this._GetMagnitude_ConvertAngle(),onedit:e=>this._SetMagnitude_ConvertAngle(e)},{name:e+".debugger.value",value:this.WaveFunc(this._GetPhase())*this._GetMagnitude_ConvertAngle()}]}]}GetScriptInterfaceClass(){return self.ISineBehaviorInstance}},new WeakMap),M=["horizontal","vertical","size","width","height","angle","opacity","value-only","forwards-backwards","z-elevation"],N=["sine","triangle","sawtooth","reverse-sawtooth","square"];self.ISineBehaviorInstance=class extends i{constructor(){super(),L.set(this,i._GetInitInst().GetSdkInstance())}set period(e){h.RequireFiniteNumber(e),L.get(this)._SetPeriod(e)}get period(){return L.get(this)._GetPeriod()}set magnitude(e){h.RequireFiniteNumber(e),L.get(this)._SetMagnitude(e)}get magnitude(){return L.get(this)._GetMagnitude()}set phase(e){L.get(this)._SetPhase(e)}get phase(){return L.get(this)._GetPhase()}set movement(e){h.RequireString(e);const t=M.indexOf(e);if(-1===t)throw new Error("invalid movement");L.get(this)._SetMovement(t)}get movement(){return M[L.get(this)._GetMovement()]}set wave(e){h.RequireString(e);const t=N.indexOf(e);if(-1===t)throw new Error("invalid wave");L.get(this)._SetWave(t)}get wave(){return N[L.get(this)._GetWave()]}get value(){const e=L.get(this);return e.WaveFunc(e._GetPhase())*e._GetMagnitude()}updateInitialState(){L.get(this).Init()}set isEnabled(e){L.get(this)._SetEnabled(!!e)}get isEnabled(){return L.get(this)._IsEnabled()}}}{const va=self.C3;va.Behaviors.Sin.Cnds={IsEnabled(){return this._IsEnabled()},CompareMovement(e){return this._GetMovement()===e},ComparePeriod(e,t){return va.compare(this._GetPeriod(),e,t)},CompareMagnitude(e,t){return va.compare(this._GetMagnitude_ConvertAngle(),e,t)},CompareWave(e){return this._GetWave()===e}}}{const Ca=self.C3;Ca.Behaviors.Sin.Acts={SetEnabled(e){this._SetEnabled(0!==e)},SetPeriod(e){this._SetPeriod(e)},SetMagnitude(e){this._SetMagnitude_ConvertAngle(e)},SetMovement(e){this._SetMovement(e)},SetWave(e){this._wave=e},SetPhase(e){const t=2*Math.PI;this._SetPhase(e*t%t)},UpdateInitialState(){this.Init()}}}{const Ka=self.C3;Ka.Behaviors.Sin.Exps={CyclePosition(){return this._GetPhase()/(2*Math.PI)},Period(){return this._GetPeriod()},Magnitude(){return this._GetMagnitude_ConvertAngle()},Value(){return this.WaveFunc(this._GetPhase())*this._GetMagnitude_ConvertAngle()}}}
+}
+
+// scripts/behaviors/skymenTrail/c3runtime/behavior.js
+{
+"use strict";
+{
+	const C3 = self.C3;
+
+	C3.Behaviors.skymenTrail = class skymenTrailBehavior extends C3.SDKBehaviorBase
+	{
+		constructor(opts)
+		{
+			super(opts);
+		}
+		
+		Release()
+		{
+			super.Release();
+		}
+	};
+}
+}
+
+// scripts/behaviors/skymenTrail/c3runtime/type.js
+{
+"use strict";
+{
+	const C3 = self.C3;
+
+	C3.Behaviors.skymenTrail.Type = class skymenTrailType extends C3.SDKBehaviorTypeBase
+	{
+		constructor(objectClass)
+		{
+			super(objectClass);
+		}
+		
+		Release()
+		{
+			super.Release();
+		}
+		
+		OnCreate()
+		{	
+		}
+	};
+}
+}
+
+// scripts/behaviors/skymenTrail/c3runtime/instance.js
+{
+"use strict";
+{
+	const C3 = self.C3;
+
+	C3.Behaviors.skymenTrail.Instance = class skymenTrailInstance extends C3.SDKBehaviorInstanceBase
+	{
+		constructor(behInst, properties)
+		{
+			super(behInst);
+			
+			this.length = 15;
+			this.resolution = 1;
+			this.widthStart = 20;
+			this.widthEnd = 0;
+			this.positions = {
+				xPositions: [],
+				yPositions: [],
+				angles: []
+			}
+			this.needsRedraw = false;
+			this.needsReconstructing = true;
+			this.attachedTo = null;
+			this.angleTowardsNewPosition = false;
+			
+			if (properties)
+			{
+				this.length = Math.floor(Math.max(properties[0], 2));
+				this.resolution = Math.floor(Math.max(properties[1], 1));
+				this.widthStart = properties[2];
+				this.widthEnd = properties[3];
+			}
+			
+			this._StopTicking();
+			this._StartTicking2();
+			this.InitTrail();
+
+			// Opt-in to getting calls to Tick()
+			//this._StartTicking();
+		}
+		
+		lerp (a, b, x) 
+		{
+			return  (1 - x) * a + b * x;
+		}
+		
+		unlerp (a, b, x) 
+		{
+			return  (x - a) / (b - a);
+		}
+		
+		InitTrail() {
+			let wi = this._inst.GetWorldInfo();
+			let x = wi.GetX();
+			let y = wi.GetY();
+			let angle = wi.GetAngle();
+			this.UpdateMesh();
+			for(let i = 0; i < this.length; i++) {
+				this.positions.xPositions.push(x);
+				this.positions.yPositions.push(y);
+				this.positions.angles.push(angle);
+			}
+			wi.SetSize(0,0);
+		}
+		
+		Release()
+		{
+			super.Release();
+		}
+		
+		SaveToJson()
+		{
+			let keys = ["length", "resolution", "widthStart", "widthEnd", "positions", "needsRedraw", "needsReconstructing", "angleTowardsNewPosition"]
+			
+			let obj = {}
+			keys.forEach(key => {
+				obj[key] = this[key];
+			})
+			return {
+				...obj,
+				attachedToUID: this._AttachedUID()
+			};
+		}
+		
+		LoadFromJson(o)
+		{
+			let keys = ["length", "resolution", "widthStart", "widthEnd", "positions", "needsRedraw", "needsReconstructing", "angleTowardsNewPosition"]
+			// load state for savegames
+			keys.forEach(key => {
+				this[key] = o[key];
+			})
+			let runtime = this.GetRuntime();
+			let that = this;
+			runtime.Dispatcher().addEventListener("afterload", () => {
+				that.attachedTo = runtime.GetInstanceByUID(o.attachedToUID);
+			})
+		}
+		
+		_UpdateMesh() {
+			this._inst.GetWorldInfo().CreateMesh((this.length - 1) * this.resolution + 1, 2);
+			this.needsReconstructing = false;
+			this.needsRedraw = true;
+		}
+		
+		UpdateMesh() {
+			this.needsReconstructing = true;
+		}
+		
+		TrimOrExtendPositions()
+		{
+			let wi = this._IsAttached()? this.attachedTo.GetWorldInfo() : this._inst.GetWorldInfo();
+			if (this.positions.xPositions.length === 0)
+			{
+				this.positions.xPositions = [wi.GetX()];
+				this.positions.yPositions = [wi.GetY()];
+				this.positions.angles = [wi.GetAngle()];
+			}
+				
+			for(let i = 0; i < this.length; i++) {
+				if (this.positions.xPositions.length === i)
+				{
+					this.positions.xPositions.push(this.positions.xPositions[i-1]);
+					this.positions.yPositions.push(this.positions.yPositions[i-1]);
+					this.positions.angles.push(this.positions.angles[i-1]);
+				}
+			}
+			this.positions.xPositions = this.positions.xPositions.slice(0, this.length);
+			this.positions.yPositions = this.positions.yPositions.slice(0, this.length);
+			this.positions.angles = this.positions.angles.slice(0, this.length);
+		}
+	
+		gradient(a, b)
+		{
+			return (b.y-a.y)/(b.x-a.x);
+		}
+		
+		Tick2()
+		{
+			const dt = this._runtime.GetDt(this._inst);
+			const wi = this._inst.GetWorldInfo();
+			if (this._IsAttached()) {
+				let attWi = this.attachedTo.GetWorldInfo();
+				if (attWi === null) {
+					this._Detach();
+					if (this.destroyWithParent) {
+						this._runtime.DestroyInstance(this._inst);
+					}
+				} else {
+					let x = attWi.GetX();
+					let y = attWi.GetY();
+					if (this.attachedTo._sdkInst.GetImagePoint) {
+						let ip = this.attachedTo._sdkInst.GetImagePoint(this.attachedToImagePoint);
+						x = ip[0];
+						y = ip[1];
+					}
+					this._PushPoints(x, y, C3.toDegrees(attWi.GetAngle()), this.angleTowardsNewPosition);
+				}
+			}
+			
+			this.TrimOrExtendPositions();
+			
+			if (this.needsReconstructing) this._UpdateMesh();
+			if (!this.needsRedraw) return;
+			
+			let positions = this.positions;
+			let allPointPositions = [];
+			var m = 0;
+			var dx1 = 0;
+			var dy1 = 0;
+			var dx2 = 0;
+			var dy2 = 0;
+			for(let i = 0; i < this.length; i++) {
+				// implement resolution here
+				let layoutPositions = [];
+				if (i > 0) {
+					let preP = {x: positions.xPositions[i-1], y: positions.yPositions[i-1]}; 
+					let curP = {x: positions.xPositions[i], y: positions.yPositions[i]}; 
+					let nexP = i < this.length - 1? {x: positions.xPositions[i+1], y: positions.yPositions[i+1]} : false; 
+				    if (nexP) {
+				      m = 1; 
+				      dx2 = (nexP.x - curP.x) * -1/3;
+				      dy2 = (nexP.y - curP.y) * -1/3;
+				    } else { 
+				      dx2 = 0; 
+				      dy2 = 0; 
+				    } 
+					for (let j = 1; j < this.resolution; j++) {
+						let progress = j/this.resolution;
+						let nextPoint = this.getBezierXY(progress, preP.x, preP.y, preP.x - dx1, preP.y - dy1, curP.x + dx2, curP.y + dy2, curP.x, curP.y)
+						let lerpAngle = C3.toDegrees(C3.angleLerp(C3.toRadians(positions.angles[i - 1]), C3.toRadians(positions.angles[i]), progress))
+						let widthBefore = this.lerp(this.widthStart/2, this.widthEnd/2, (i-1)/(this.length  - 1));
+						let widthAfter = this.lerp(this.widthStart/2, this.widthEnd/2, (i)/(this.length  - 1));
+	    				layoutPositions.push(
+		    				{
+								x: nextPoint.x + Math.cos((lerpAngle - 90) * Math.PI/180) * this.lerp(widthBefore, widthAfter, progress),
+								y: nextPoint.y + Math.sin((lerpAngle - 90) * Math.PI/180) * this.lerp(widthBefore, widthAfter, progress)
+							},
+							{
+								x: nextPoint.x + Math.cos((lerpAngle + 90) * Math.PI/180) * this.lerp(widthBefore, widthAfter, progress),
+								y: nextPoint.y + Math.sin((lerpAngle + 90) * Math.PI/180) * this.lerp(widthBefore, widthAfter, progress)
+							}
+						)
+					}
+				}
+				layoutPositions.push(
+					{
+						x: positions.xPositions[i] + Math.cos((positions.angles[i] - 90) * Math.PI/180) * this.lerp(this.widthStart/2, this.widthEnd/2, i/(this.length  - 1)),
+						y: positions.yPositions[i] + Math.sin((positions.angles[i] - 90) * Math.PI/180) * this.lerp(this.widthStart/2, this.widthEnd/2, i/(this.length  - 1))
+					},
+					{
+						x: positions.xPositions[i] + Math.cos((positions.angles[i] + 90) * Math.PI/180) * this.lerp(this.widthStart/2, this.widthEnd/2, i/(this.length  - 1)),
+						y: positions.yPositions[i] + Math.sin((positions.angles[i] + 90) * Math.PI/180) * this.lerp(this.widthStart/2, this.widthEnd/2, i/(this.length  - 1))
+					}
+				)
+				//runtime.objects.Sprite.createInstance(0, layoutPositions[0].x, layoutPositions[0].y);
+				//runtime.objects.Sprite.createInstance(0, layoutPositions[1].x, layoutPositions[1].y);
+				allPointPositions.push(...layoutPositions);
+				this.needsRedraw = false;
+			}
+			
+			let minX = Infinity;
+			let minY = Infinity;
+			let maxX = -Infinity;
+			let maxY = -Infinity;
+			
+			allPointPositions.forEach(positions => {
+				minX = Math.min(minX, positions.x);
+				minY = Math.min(minY, positions.y);
+				maxX = Math.max(maxX, positions.x);
+				maxY = Math.max(maxY, positions.y);
+			})
+			
+			wi.SetOriginX(0.5)
+			wi.SetOriginY(0.5)
+			wi.SetBboxChanged();
+			wi.SetXY((minX + maxX) / 2, (minY + maxY) / 2)
+			wi.SetSize(maxX - minX, maxY - minY)
+			wi.SetBboxChanged();
+			
+			for(let i = 0; i < (this.length - 1) * this.resolution + 1; i++) {
+				wi.SetMeshPoint(i, 0, {
+					mode: "absolute",
+					x: this.unlerp(minX, maxX, allPointPositions[i * 2].x),
+					y: this.unlerp(minY, maxY, allPointPositions[i * 2].y),
+					u: -1,
+					v: -1
+				})
+				wi.SetMeshPoint(i, 1, {
+					mode: "absolute",
+					x: this.unlerp(minX, maxX, allPointPositions[i * 2 + 1].x),
+					y: this.unlerp(minY, maxY, allPointPositions[i * 2 + 1].y),
+					u: -1,
+					v: -1
+				})
+			}
+			
+			// ... code to run every tick for this behavior ...
+		}
+		
+
+		GetDebuggerProperties()
+		{
+			return [{
+				title: "Trail Renderer",
+				properties: [
+					{name: "$Length",		value: this.length,		onedit: (val) => {this._SetLength(parseInt(val))}},
+					{name: "$Width Start",	value: this.widthStart,	onedit: (val) => {this._SetWidthStart(parseFloat(val))}},
+					{name: "$Width End",	value: this.widthEnd,	onedit: (val) => {this._SetWidthEnd(parseFloat(val))}},
+					{name: "$Resolution",	value: this.resolution,	onedit: (val) => {this._SetResolution(parseInt(val))}},
+					{name: "$Positions",	value: JSON.stringify(this.positions) },
+				]
+			}];
+		}
+		
+		getBezierXY(t, sx, sy, cp1x, cp1y, cp2x, cp2y, ex, ey) {
+		  return {
+		    x: Math.pow(1-t,3) * sx + 3 * t * Math.pow(1 - t, 2) * cp1x 
+		      + 3 * t * t * (1 - t) * cp2x + t * t * t * ex,
+		    y: Math.pow(1-t,3) * sy + 3 * t * Math.pow(1 - t, 2) * cp1y 
+		      + 3 * t * t * (1 - t) * cp2y + t * t * t * ey
+		  };
+		}
+		
+		angle(x1, y1, x2, y2) {
+			return C3.toDegrees(Math.atan2(y2 - y1, x2 - x1))
+		}
+		
+		
+		//Conditions
+		_IsAttached() {
+			return this.attachedTo !== null;
+		}
+		_CompareX(id,cmp,value) {
+			return C3.compare(this._GetX(id), cmp, value);
+		}
+		_CompareY(id,cmp,value) {
+			return C3.compare(this._GetY(id), cmp, value);
+		}
+		_CompareAngle(id,cmp,value) {
+			return C3.compare(this._GetAngle(id), cmp, value);
+		}
+		
+		//Actions
+		_Attach(object,angleTowardsNewPosition, imagePoint, destroyWithParent) {
+			this.attachedTo = object.GetFirstPicked();
+			this.angleTowardsNewPosition = angleTowardsNewPosition;
+			this.attachedToImagePoint = imagePoint;
+			this.destroyWithParent = destroyWithParent;
+		}
+		_Detach() {
+			this.attachedTo = null;
+		}
+		_PushPoints(x,y,angle,angleTowardsNewPosition) {
+			let lastX = this.positions.xPositions[0];
+			let lastY = this.positions.yPositions[0];
+			this.positions.xPositions.unshift(x);
+			this.positions.yPositions.unshift(y);
+			if (angleTowardsNewPosition) {
+				angle = this.angle(lastX, lastY, x, y)
+				if (isNaN(angle)) angle = 0;
+			}
+			this.positions.angles.unshift(angle);
+			this.needsRedraw = true;
+		}
+		_ResetToPoint(x,y,angle) {
+			this.positions.xPositions = [x];
+			this.positions.yPositions = [y];
+			this.positions.angles = [angle];
+			this.needsRedraw = true;
+		}
+		_Reset() {
+			this.positions.xPositions = [];
+			this.positions.yPositions = [];
+			this.positions.angles = [];
+			this.needsRedraw = true;
+		}
+		_SetLength(length) {
+			length = Math.floor(Math.max(length, 2));
+			if (this.length === length) return;
+			this.length = length;
+			this.UpdateMesh();
+		}
+		_SetResolution(resolution) {
+			resolution = Math.floor(Math.max(resolution, 1));
+			if (this.resolution === resolution) return;
+			this.resolution = resolution;
+			this.UpdateMesh();
+		}
+		_SetWidthStart(widthstart) {
+			this.widthStart = widthstart;
+			this.needsRedraw = true;
+		}
+		_SetWidthEnd(widthend) {
+			this.widthEnd = widthend;
+			this.needsRedraw = true;
+		}
+		
+		//Expressions
+		_AttachedUID() {
+			return this._IsAttached() ? this.attachedTo.GetUID() : -1;
+		}
+		_GetX(id) {
+			if (id < 0 || id >= this.length) return 0;
+			return this.positions.xPositions[id];
+		}
+		_GetY(id) {
+			if (id < 0 || id >= this.length) return 0;
+			return this.positions.yPositions[id];
+		}
+		_GetAngle(id) {
+			if (id < 0 || id >= this.length) return 0;
+			return this.positions.angles[id];
+		}
+		_WidthStart() {
+			return this.widthStart;
+		}
+		_WidthEnd() {
+			return this.widthEnd;
+		}
+		_Resolution() {
+			return this.resolution;
+		}
+		_Length() {
+			return this.length;
+		}
+	};
+}
+}
+
+// scripts/behaviors/skymenTrail/c3runtime/conditions.js
+{
+"use strict";
+{
+    self.C3.Behaviors.skymenTrail.Cnds = {
+        IsAttached()
+{
+	return this._IsAttached()
+},
+
+CompareX(id,cmp,value)
+{
+	this._CompareX(id,cmp,value)
+},
+
+CompareY(id,cmp,value)
+{
+	this._CompareY(id,cmp,value)
+},
+
+CompareAngle(id,cmp,value)
+{
+	this._CompareAngle(id,cmp,value)
+}
+    };
+}
+}
+
+// scripts/behaviors/skymenTrail/c3runtime/actions.js
+{
+"use strict";
+{
+    self.C3.Behaviors.skymenTrail.Acts = {
+        Attach(object,angleTowardsNewPosition,imagePoint,destroyWithParent)
+{
+	this._Attach(object,angleTowardsNewPosition,imagePoint,destroyWithParent)
+},
+
+PushPoint(x,y,angle,angleTowardsNewPosition)
+{
+	this._PushPoints(x,y,angle,angleTowardsNewPosition);
+},
+
+Reset()
+{
+	this._Reset();
+},
+
+SetLength(length)
+{
+	this._SetLength(length);
+},
+
+SetResolution(resolution)
+{
+	this._SetResolution(resolution);
+},
+
+SetWidthStart(widthstart)
+{
+	this._SetWidthStart(widthstart);
+},
+
+SetWidthEnd(widthend)
+{
+	this._SetWidthEnd(widthend);
+},
+
+ResetToPoint(x,y,angle)
+{
+	this._ResetToPoint(x,y,angle);
+},
+
+Detach()
+{
+	this._Detach()
+}
+    };
+}
+}
+
+// scripts/behaviors/skymenTrail/c3runtime/expressions.js
+{
+"use strict";
+{
+    self.C3.Behaviors.skymenTrail.Exps = {
+        AttachedUID()
+{
+	return this._AttachedUID();
+},
+
+GetX(id)
+{
+	return this._GetX(id);
+},
+
+GetY(id)
+{
+	return this._GetY(id);
+},
+
+GetAngle(id)
+{
+	return this._GetAngle(id);
+},
+
+WidthStart()
+{
+	return this._WidthStart();
+},
+
+WidthEnd()
+{
+	return this._WidthEnd();
+},
+
+Resolution()
+{
+	return this._Resolution();
+},
+
+Length()
+{
+	return this._Length();
+}
+    };
+}
+}
+
 // scripts/expTable.js
 {
 
@@ -7071,6 +7671,20 @@ self.C3_ExpressionFuncs = [
 		() => -89,
 		() => "",
 		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => v0.GetValue();
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0(n1.ExpObject("initialJackpot"));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0(n1.ExpObject("initialBallRemain"));
+		},
+		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject();
 		},
@@ -7081,10 +7695,6 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("PT_xNum");
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => v0.GetValue();
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -7391,6 +8001,7 @@ self.C3_ExpressionFuncs = [
 		},
 		() => 0.1,
 		() => 20,
+		() => 10,
 		() => "party time",
 		p => {
 			const n0 = p._GetNode(0);
@@ -7844,6 +8455,7 @@ self.C3_ExpressionFuncs = [
 		},
 		() => 9,
 		() => "neon",
+		() => 8,
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -7895,11 +8507,14 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() * 1.5);
 		},
+		() => "entryStaticGateTicket",
+		() => "UI2D_3",
+		() => 1039,
+		() => 800,
 		p => {
 			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 30);
+			return () => (n0.ExpObject() * 0.8);
 		},
-		() => "entryStaticGateTicket",
 		() => "exitStaticGateBall",
 		() => 104,
 		() => 747,
