@@ -81,6 +81,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.Text.Acts.SetVisible,
 		C3.Plugins.Sprite.Acts.SetAnim,
+		C3.Behaviors.Flash.Acts.StopFlashing,
 		C3.Plugins.System.Exps.tickcount,
 		C3.Plugins.System.Exps.fps,
 		C3.Plugins.Mikal_3DObject.Exps.Count,
