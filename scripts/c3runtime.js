@@ -7863,6 +7863,8 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => n0.ExpObject(and("stakeBlue.", n1.ExpInstVar()));
 		},
+		() => 75,
+		() => 100,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("stakeYellow");
@@ -8060,7 +8062,6 @@ self.C3_ExpressionFuncs = [
 		() => 150,
 		() => "show setting",
 		() => "hide setting",
-		() => 100,
 		() => "debug",
 		p => {
 			const n0 = p._GetNode(0);
@@ -8281,6 +8282,7 @@ self.C3_ExpressionFuncs = [
 			const n2 = p._GetNode(2);
 			return () => (((((n0.ExpInstVar() + 1)) === (n1.ExpObject("stakeBlue")) ? 1 : 0)) ? (0) : ((n2.ExpInstVar() + 1)));
 		},
+		() => "zoom",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);

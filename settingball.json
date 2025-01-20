@@ -35,7 +35,7 @@
 	"initialBallRemain": 100,
 	"initialJackpot": 500,
 	"partyTimeActive": 5,
-	"partyTimeDuration": 30,
+	"partyTimeDuration": 15,
 	"gravity": -50,
 	"smallBall": {
 		"onReady": {
