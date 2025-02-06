@@ -7847,6 +7847,9 @@ self.C3_ExpressionFuncs = [
 			const v3 = p._GetNode(3).GetVar();
 			return () => f0(n1.ExpObject((and(v2.GetValue(), v3.GetValue()) + ".zElevation")));
 		},
+		() => "ball2D_1",
+		() => -5000,
+		() => 56,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("stakeBlue");
@@ -8061,7 +8064,6 @@ self.C3_ExpressionFuncs = [
 		() => 80,
 		() => 1340,
 		() => 355,
-		() => "ball2D_1",
 		() => 734,
 		() => "Entry",
 		() => 850,
@@ -8559,7 +8561,6 @@ self.C3_ExpressionFuncs = [
 			return () => (n0.ExpObject() * 0.8);
 		},
 		() => "projeksi ke 2D",
-		() => -5000,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const f1 = p._GetNode(1).GetBoundMethod();
@@ -8603,7 +8604,6 @@ self.C3_ExpressionFuncs = [
 			const n7 = p._GetNode(7);
 			return () => Math.abs(((f0("ball2D_2", f1("ball3D", n2.ExpObject(), n3.ExpObject()), f4("ball3D", n5.ExpObject(), n6.ExpObject())) - 25) - n7.ExpInstVar()));
 		},
-		() => 56,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const f1 = p._GetNode(1).GetBoundMethod();
