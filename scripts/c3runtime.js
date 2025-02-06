@@ -8627,7 +8627,6 @@ self.C3_ExpressionFuncs = [
 			return () => C3.lerp(n0.ExpObject(), (f1("ball2D_2", f2("ball3D", n3.ExpObject(), n4.ExpObject()), f5("ball3D", n6.ExpObject(), n7.ExpObject())) + 7), (f8() * 32));
 		},
 		() => "ball2D_2",
-		() => "setting",
 		() => ".deviceId",
 		() => "bbfea1b0eb67313a",
 		() => ".os",
@@ -8656,6 +8655,7 @@ self.C3_ExpressionFuncs = [
 		() => "data",
 		() => -100,
 		() => -5,
+		() => "setting",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
